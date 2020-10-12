@@ -169,7 +169,7 @@ ServerSocket.prototype.stopAsync = function () {
     });
 };
 
-Socket.prototype.open = function (host, port, success, error) {
+Socket.prototype.open = function (host, port, success, error, timeout = 0) {
     success = success || (() => {});
     error = error || (() => {});
 
@@ -222,13 +222,13 @@ Socket.prototype.open = function (host, port, success, error) {
         },
         CORDOVA_SERVICE_NAME,
         "open",
-        [ this.socketKey, host, port ]
+        [ this.socketKey, host, port, timeout ]
     );
 };
 
-Socket.prototype.openAsync = function (host, port) {
+Socket.prototype.openAsync = function (host, port, timeout = 0) {
     return new Promise((resolve, reject) => {
-        return this.open(host, port, resolve, reject);
+        return this.open(host, port, resolve, reject, timeout);
     });
 };
 
